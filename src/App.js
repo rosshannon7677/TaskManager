@@ -3,6 +3,9 @@ import { Navbar, Container, Nav } from 'react-bootstrap'; // Import Bootstrap co
 import './App.css'; // You can create a separate CSS file for custom styling
 import AboutUs from './Components/aboutUs';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Task from './Components/task';
+
+// ... (previous imports)
 
 function App() {
   // JSX structure representing the UI of the component
@@ -16,7 +19,7 @@ function App() {
             {/* Navigation links */}
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/addTask">Tasks</Nav.Link>
+              <Nav.Link href="/task">Tasks</Nav.Link>
               <Nav.Link href="/aboutUs">About</Nav.Link>
             </Nav>
           </Container>
@@ -24,7 +27,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<div>Home Page</div>} />
-          <Route path="/addTask" element={<div>Add Task Page</div>} />
+          <Route path="/task" element={<Task />} />
           <Route path="/aboutUs" element={<AboutUs />} />
         </Routes>
       </div>
