@@ -1,0 +1,54 @@
+/* task.css */
+
+/* Styling for the overall container holding the task components */
+.container {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Styling for the form container on the left side */
+.form-container {
+    margin-right: 20px;
+}
+
+/* Styling for the input field in the form */
+.form-control {
+    width: 80%;
+    margin-right: 10px;
+}
+
+/* Styling for the dropdown container in the form */
+.dropdown-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Styling for form groups within the detailed task section */
+.form-group {
+    width: 90%;
+    margin-right: 10px;
+}
+
+/* Styling for the priority select dropdown in the detailed task section */
+.priority-select {
+    width: 90%;
+    margin-right: 10px;
+}
+
+/* Styling for each task card on the right side */
+.card-container {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+/* Styling for the title of each task card (clickable) */
+.card-title {
+    cursor: pointer;
+}
+
+/* Styling for the remove button in each task card */
+.remove-button {
+    margin-top: 10px;
+}
