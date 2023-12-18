@@ -1,45 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// Importing necessary hooks and modules
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Tasks from "./tasks";
 
+// Define the List component
 function List() {
-  // State to hold the tasks data
-  const [tasks, setTasks] = useState([]);
+    // State 'data' to store the tasks
+    const [data, setData] = useState([]);
 
-  // useEffect to fetch tasks when the component mounts
-  useEffect(() => {
-    // Fetch tasks when the component mounts
-    fetchTasks();
-  }, []);
+    // useEffect hook to fetch tasks data when the component mounts
+    useEffect(
+        () => {
+            // Axios GET request to your API endpoint
+            axios.get('http://localhost:4000/api/tasks')
+                .then(
+                    (response) => {
+                        // Update the state with the response data
+                        setData(response.data)
+                    }
+                )
+                .catch(
+                    (error) => {
+                        // Log any errors to the console
+                        console.log(error);
+                    }
+                )
+        }, [] // Empty dependency array means this effect runs only once after the initial render
+    );
 
-  // Function to fetch tasks from the backend
-  const fetchTasks = () => {
-    // Backend endpoint for fetching tasks is 'http://localhost:4000/api/tasks'
-    axios.get('http://localhost:4000/api/tasks')
-      .then(response => {
-        // Update the tasks state with the fetched data
-        setTasks(response.data);
-      })
-      .catch(error => {
-        // Handle errors 
-        console.error('Error fetching tasks:', error);
-      });
-  };
+    // Function to reload tasks data
+    const Reload = () => {
+        axios.get('http://localhost:4000/api/tasks')
+            .then(
+                (response) => {
+                    // Update the state with the new tasks data
+                    setData(response.data)
+                }
+            )
+            .catch(
+                (error) => {
+                    // Log any errors to the console
+                    console.log(error);
+                }
+            )
+    }
 
-  return (
-    <div>
-      <h2>Task List</h2>
-      <ul>
-        {tasks.map(task => (
-          <li key={task._id}>
-            {/* Display task information here */}
-            <p>Task Name: {task.name}</p>
-            <p>Description: {task.description}</p>
-            <p>Priority: {task.priority}</p>     
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    // Rendering the Tasks component and passing the tasks data and Reload function as props
+    return (
+        <div>
+            <Tasks myTasks={data} ReloadData={Reload}></Tasks>
+        </div>
+    );
 }
 
+// Export the List component for use in other parts of the app
 export default List;
