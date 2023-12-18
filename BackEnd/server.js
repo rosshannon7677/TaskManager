@@ -43,7 +43,26 @@ app.put('/api/task/:id', async (req, res) => {
     res.send(task);
 });
 
+// Define a DELETE route for removing tasks
+app.delete('/api/task/:id', async (req, res) => {
+    console.log("Delete: " + req.params.id);
 
+    let task = await taskModel.findByIdAndDelete(req.params.id);
+    res.send(task);
+});
+
+// Define a POST route for creating new tasks
+app.post('/api/task', (req, res) => {
+    console.log(req.body);
+
+    taskModel.create({
+        name: req.body.name,
+        description: req.body.description,
+        priority: req.body.priority
+    })
+    .then(() => res.send("Task Created"))
+    .catch(() => res.send("Task NOT Created"));
+});
 
 // Define a GET route for the root of the server
 app.get('/', (req, res) => {
