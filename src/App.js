@@ -1,39 +1,57 @@
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { Navbar, Container, Nav } from 'react-bootstrap'; // Import Bootstrap components
-import './App.css'; // You can create a separate CSS file for custom styling
+// Importing necessary modules and components
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Create from './Components/createTask';
+import Edit from './Components/editTask';
 import AboutUs from './Components/aboutUs';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Task from './Components/task';
+import Footer from './Components/footer';
+import List from './Components/list';
 
-// ... (previous imports)
-
+// Define the App component
 function App() {
-  // JSX structure representing the UI of the component
+  // The JSX returned by the component
   return (
-    <Router>
+    
+    <BrowserRouter>
       <div className="App">
-        {/* Bootstrap Navbar */}
-        <Navbar bg="dark" variant="dark">
+        {/* Navbar setup using react-bootstrap components */}
+        <Navbar bg="dark" data-bs-theme="dark">
           <Container>
-            <Navbar.Brand href="/">Task Manager</Navbar.Brand>
-            {/* Navigation links */}
-            <Nav className="mr-auto">
+            <Navbar.Brand>Task Manager</Navbar.Brand>
+            <Nav className="me-auto">
+              {/* Navigation links */}
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/task">Tasks</Nav.Link>
-              <Nav.Link href="/aboutUs">About</Nav.Link>
+              <Nav.Link href="/create">Create</Nav.Link>
+              <Nav.Link href="/list">List</Nav.Link>
+              <Nav.Link href="/aboutUs">About Us</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
 
+        {/* Routes setup for different pages in the application */}
         <Routes>
-          <Route path="/" element={<div>Home Page</div>} />
-          <Route path="/task" element={<Task />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
+          {/* Route for the home page */}
+          <Route path='/' element={<Navbar></Navbar>}></Route>
+          {/* Route for listing tasks */}
+          <Route path='/list' element={<List></List>}></Route>
+          {/* Route for creating a new task */}
+          <Route path='/create' element={<Create></Create>}></Route>
+          {/* Route for editing a task */}
+          <Route path='/edit/:id' element={<Edit></Edit>}></Route>
+          {/* Route for the About Us page */}
+          <Route path='/aboutUs/' element={<AboutUs></AboutUs>}></Route>
         </Routes>
+        
+        {/* Footer component displayed on all pages */}
+        <Footer /> 
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-// Export the 'App' component as the default export of this module
+// Export the App component
 export default App;
