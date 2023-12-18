@@ -1,41 +1,70 @@
-// Import required modules
 const express = require('express');
 const app = express();
 const port = 4000;
 const cors = require('cors');
+const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
-// Enable Cross-Origin Resource Sharing (CORS) middleware
+// Enabling CORS for cross-origin requests
 app.use(cors());
 
-// CORS headers configuration
+// Additional CORS configuration
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-// Body parsing middleware for handling JSON and URL-encoded data
-const bodyParser = require("body-parser");
+// Configuring body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// MongoDB connection setup using Mongoose
-const mongoose = require('mongoose');
+// Connect to MongoDB using Mongoose
+mongoose.connect('mongodb+srv://datarep:F0Ps2tT2XWn4j2UP@cluster1.eph68ut.mongodb.net/?retryWrites=true&w=majority')
+    .then(() => console.log("Connected"))
+    .catch(err => console.log(err));
 
-async function main() {
-  // Connect to MongoDB using Mongoose
-  await mongoose.connect('mongodb+srv://admin:admin@cluster0.bypnyjt.mongodb.net/MyDB?retryWrites=true&w=majority');
-  // Use the following connection string for local MongoDB with authentication
-  // await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');
-}
-
-// Define a simple route that responds with 'Hello World!' for GET requests to the root
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+// Defining a schema for tasks
+const taskSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+    priority: String
 });
 
-// Set up the server to listen on the specified port
+// Creating a model for tasks
+const taskModel = mongoose.model('my_tasks', taskSchema);
+
+// Define a PUT route for updating tasks
+app.put('/api/task/:id', async (req, res) => {
+    console.log('Update: ' + req.params.id);
+
+    let task = await taskModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    res.send(task);
+});
+
+
+
+// Define a GET route for the root of the server
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+// Define a GET route for retrieving all tasks
+app.get('/api/tasks', async (req, res) => {
+    let tasks = await taskModel.find({});
+    res.json(tasks);
+});
+
+// Define a GET route for retrieving a single task by ID
+app.get('/api/task/:identifier', async (req, res) => {
+    console.log(req.params.identifier);
+
+    let task = await taskModel.findById(req.params.identifier);
+    res.send(task);
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server listening on port ${port}`);
 });
