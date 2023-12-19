@@ -45,7 +45,6 @@ function List() {
             )
     }
 
-    // Rendering the Tasks component and passing the tasks data and Reload function as props
     return (
         <div>
             <Tasks myTasks={data} ReloadData={Reload}></Tasks>
