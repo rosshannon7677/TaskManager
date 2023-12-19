@@ -8,6 +8,7 @@ function Create() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('');
+    
 
     // Function to handle the form submission
     const handleSubmit = (e) => {
@@ -28,16 +29,18 @@ function Create() {
 
         // Axios POST request to add the new task
         axios.post('http://localhost:4000/api/task', task)
-            .then()
+            .then(()=>{
+                window.alert('Task added to list page');
+            })
             .catch();
     }
 
     // Rendering the form to create a new task
     return (
-        <div>
+        <div style={{ width: '50%', margin: 'auto', padding: '20px', backgroundColor: '#f2f2f2', borderRadius: '8px' }}>
             <form onSubmit={handleSubmit}>
                 {/* Task name input */}
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
                     <label>Add task Name: </label>
                     <input type="text"
                         className="form-control"
@@ -45,9 +48,9 @@ function Create() {
                         onChange={(e) => { setName(e.target.value) }}
                     />
                 </div>
-
+    
                 {/* Task description input */}
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
                     <label>Add task Description: </label>
                     <input type="text"
                         className="form-control"
@@ -55,9 +58,9 @@ function Create() {
                         onChange={(e) => { setDescription(e.target.value) }}
                     />
                 </div>
-
+    
                 {/* Task priority input */}
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
                     <label>Add task Priority: </label>
                     <input type="text"
                         className="form-control"
@@ -65,14 +68,16 @@ function Create() {
                         onChange={(e) => { setPriority(e.target.value) }}
                     />
                 </div>
-
+    
                 {/* Submit button */}
-                <div>
-                    <input type="submit" value="Add task" />
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <input type="submit" value="Add task" className="btn btn-primary" />
                 </div>
             </form>
         </div>
     );
+    
+    
 }
 
 // Export the Create component for use in other parts of the app
