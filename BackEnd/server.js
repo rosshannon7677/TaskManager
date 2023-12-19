@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
+
 // Enabling CORS for cross-origin requests
 app.use(cors());
 
@@ -29,7 +30,7 @@ mongoose.connect('mongodb+srv://datarep:F0Ps2tT2XWn4j2UP@cluster1.eph68ut.mongod
 const taskSchema = new mongoose.Schema({
     name: String,
     description: String,
-    priority: String
+    priority: Number
 });
 
 // Creating a model for tasks
@@ -60,7 +61,7 @@ app.post('/api/task', (req, res) => {
         description: req.body.description,
         priority: req.body.priority
     })
-    .then(() => res.send("Task Created"))
+    .then(() => res.send("Task Created") )
     .catch(() => res.send("Task NOT Created"));
 });
 
@@ -69,11 +70,17 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// Define a GET route for retrieving all tasks
+// Define a GET route for retrieving all tasks, sorted by priority
 app.get('/api/tasks', async (req, res) => {
-    let tasks = await taskModel.find({});
-    res.json(tasks);
+    try {
+        let tasks = await taskModel.find({}).sort({ priority: 1 }); // Sort tasks by priority
+        res.json(tasks);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error retrieving tasks");
+    }
 });
+
 
 // Define a GET route for retrieving a single task by ID
 app.get('/api/task/:identifier', async (req, res) => {
