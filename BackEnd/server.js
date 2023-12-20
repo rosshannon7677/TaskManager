@@ -56,24 +56,35 @@ app.delete('/api/task/:id', async (req, res) => {
 app.post('/api/task', (req, res) => {
     console.log(req.body);
 
+    // Check if the priority is within the allowed range of 1 to 10
+    const priority = parseInt(req.body.priority, 10);
+    if (isNaN(priority) || priority < 1 || priority > 10) {
+        return res.status(400).send("Priority must be a number between 1 and 10.");
+    }
+
+    // Create the task if the priority is valid
     taskModel.create({
         name: req.body.name,
         description: req.body.description,
-        priority: req.body.priority
+        priority: priority // Use the parsed priority
     })
-    .then(() => res.send("Task Created") )
-    .catch(() => res.send("Task NOT Created"));
+    .then(() => res.status(201).send("Task Created"))
+    .catch((error) => {
+        console.log(error);
+        res.status(500).send("Task NOT Created");
+    });
 });
+
 
 // Define a GET route for the root of the server
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// Define a GET route for retrieving all tasks, sorted by priority
+// Define a GET route for retrieving all tasks, sorted by priority, with priority between 1 and 10
 app.get('/api/tasks', async (req, res) => {
     try {
-        let tasks = await taskModel.find({}).sort({ priority: 1 }); // Sort tasks by priority
+        let tasks = await taskModel.find({ priority: { $gte: 1, $lte: 10 } }).sort({ priority: 1 });
         res.json(tasks);
     } catch (error) {
         console.log(error);
@@ -85,7 +96,6 @@ app.get('/api/tasks', async (req, res) => {
 // Define a GET route for retrieving a single task by ID
 app.get('/api/task/:identifier', async (req, res) => {
     console.log(req.params.identifier);
-
     let task = await taskModel.findById(req.params.identifier);
     res.send(task);
 });

@@ -20,6 +20,12 @@ function Create() {
             " Priority: " + priority
         );
 
+         // Check if the priority is within the range of 1 to 10
+        if (priority < 1 || priority > 10) {
+        window.alert('Please enter a priority number between 1 and 10.');
+        return; // Exit the function if the priority is not valid
+        }
+
         // Constructing the task object from state variables
         const task = {
             name: name,
@@ -32,12 +38,15 @@ function Create() {
             .then(()=>{
                 window.alert('Task added to list page');
             })
-            .catch();
+            .catch((error) => {
+                // You can handle server errors here, if necessary
+                console.error('Error adding the task:', error);
+            });
     }
 
     // Rendering the form to create a new task
     return (
-        <div style={{ width: '50%', margin: 'auto', padding: '20px', backgroundColor: '#f2f2f2', borderRadius: '8px' }}>
+        <div style={{marginTop: '20px', width: '50%', margin: 'auto', padding: '20px', backgroundColor: '#f2f2f2', borderRadius: '20px' }}>
             <form onSubmit={handleSubmit}>
                 {/* Task name input */}
                 <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
@@ -61,7 +70,7 @@ function Create() {
     
                 {/* Task priority input */}
                 <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
-                    <label>Add task Priority: </label>
+                    <label>Add task Priority(1-10): </label>
                     <input type="text"
                         className="form-control"
                         value={priority}
