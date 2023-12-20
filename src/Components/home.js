@@ -9,7 +9,7 @@ const Home = () => {
         <h1>Welcome to Task Manager</h1>
         <p>Organize your tasks efficiently and effortlessly.</p>
         <Button href="/create" variant="light" className="me-2">Get Started</Button>
-        <Button href="https://www.youtube.com/watch?v=R5i8alK5hPo" variant="secondary" target="_blank" rel="noopener noreferrer">Video on productiveness</Button>
+        <Button href="https://www.youtube.com/watch?v=R5i8alK5hPo" variant="secondary" target="_blank" rel="noopener noreferrer">Video on Productiveness</Button>
       </div>
 
       {/* Services Section */}
@@ -32,7 +32,7 @@ const Home = () => {
           </Col>
           <Col sm={12} md={6} lg={3}>
             <div className="bg-success text-white p-4 text-center h-100">
-              <h2>Get insights       </h2>
+              <h2>Get insights</h2>
             </div>
           </Col>
         </Row>

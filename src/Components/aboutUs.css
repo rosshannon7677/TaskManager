@@ -26,8 +26,8 @@
 }
 
 .info-image {
-  width: 150px;  /* Set a fixed width for square images */
-  height: 150px; /* Set a fixed height for square images */
+  width: 200px;  /* Set a fixed width for square images */
+  height: 180px; /* Set a fixed height for square images */
   margin-right: 20px;
 }
 

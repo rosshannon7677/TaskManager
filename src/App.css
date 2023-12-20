@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  padding-bottom: 50px; /* Add bottom padding to accommodate the footer */
+  position: relative; /* Needed for footer positioning */
+  background-image: url('./pattern3.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh; /* Ensure the div takes up at least the height of the viewport */
 }
 
 .App-logo {
@@ -12,9 +19,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.navbar-custom {
+  background-color: #343a40; /* Dark gray color */
+}
+
+.nav-link-custom {
+  color: #ffffff !important; /* White text color for better contrast */
+}
 
 .App-header {
-  background-color: #282c34;
+  background-color: #343a40;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +39,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #343a40;
 }
 
 @keyframes App-logo-spin {

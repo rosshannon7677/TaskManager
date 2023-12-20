@@ -1,15 +1,19 @@
-// AboutUs.js
+// Import React and the CSS file for styling
 import React from 'react';
 import './aboutUs.css';
+import meeting from './meeting.jpg';
+import board from './board.png';
 
+// Define the AboutUs component
 function AboutUs() {
+  // JSX returned by the component
   return (
     <div className="about-container">
       <div className="about-content">
-        <h2 className="about-heading">About Us</h2>
 
+        {/* First info card: Introduction to Task Manager */}
         <div className="info-card">
-          <img src="https://via.placeholder.com/150" alt="Welcome" className="info-image" />
+        <img src={meeting} alt="Team Discussion" className="info-image" />
           <div className="info-text">
             <h3>Welcome to Task Manager</h3>
             <p>
@@ -20,8 +24,9 @@ function AboutUs() {
           </div>
         </div>
 
+        {/* Second info card: Mission statement */}
         <div className="info-card">
-          <img src="https://via.placeholder.com/150" alt="Mission" className="info-image" />
+        <img src={board} alt="Board" className="info-image" />
           <div className="info-text">
             <h3>Our Mission</h3>
             <p>
@@ -35,4 +40,5 @@ function AboutUs() {
   );
 }
 
+// Export the AboutUs component
 export default AboutUs;
