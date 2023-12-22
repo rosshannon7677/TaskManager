@@ -13,7 +13,7 @@ export default function Edit(props) {
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("");
 
-    // Hook to programmatically navigate to different routes
+    // Hook to navigate to different routes
     const navigate = useNavigate();
 
     // useEffect to fetch task details once on component mount
@@ -28,7 +28,7 @@ export default function Edit(props) {
             .catch(function (error) {
                 console.log(error);
             })
-    }, [id]); // Dependency array with 'id' to re-run effect if 'id' changes
+    }, [id]); // Dependency array with 'id' to rerun if 'id' changes
 
     // Function to handle form submission
     const handleSubmit = (event) => {
@@ -53,10 +53,10 @@ export default function Edit(props) {
 
     // JSX for the task edit form
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="edit-task-container">
+            <form onSubmit={handleSubmit} className="edit-task-form">
                 {/* Task name input field */}
-                <div className="form-group">
+                <div className="form-group task-name-edit">
                     <label>Edit Task Name: </label>
                     <input
                         type="text"
@@ -66,7 +66,7 @@ export default function Edit(props) {
                     />
                 </div>
                 {/* Description input field */}
-                <div className="form-group">
+                <div className="form-group task-description-edit">
                     <label>Edit Description: </label>
                     <input
                         type="text"
@@ -76,7 +76,7 @@ export default function Edit(props) {
                     />
                 </div>
                 {/* Priority input field */}
-                <div className="form-group">
+                <div className="form-group task-priority-edit">
                     <label>Edit Priority: </label>
                     <input
                         type="text"
@@ -86,7 +86,7 @@ export default function Edit(props) {
                     />
                 </div>
                 {/* Submit button */}
-                <div className="form-group">
+                <div className="form-group submit-edit">
                     <input type="submit" value="Edit Task" className="btn btn-primary" />
                 </div>
             </form>

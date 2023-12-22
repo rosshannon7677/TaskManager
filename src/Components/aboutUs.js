@@ -40,5 +40,4 @@ function AboutUs() {
   );
 }
 
-// Export the AboutUs component
 export default AboutUs;

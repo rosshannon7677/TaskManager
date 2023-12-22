@@ -25,6 +25,59 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Styles for the task item container */
+.task-item-container {
+  width: 30%;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+/* Styles for the task card */
+.task-card {
+  border: 3px solid black;
+}
+
+/* Styles for the task card header */
+.task-card-header {
+  background-color: lightgray;
+  border: 1px solid black;
+}
+
+/* Styles for the task card body */
+.task-card-body {
+  border: 1px solid black;
+}
+
+/* Styles for the task description paragraph */
+.task-description {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+/* Styles for the task priority footer */
+.task-priority {
+  width: 35%;
+  margin: auto;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+/* Styles for the task card actions section */
+.task-card-actions {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styles for the edit button */
+.edit-button {
+  margin-right: 10px;
+}
+
+
+
 .info-image {
   width: 200px;  /* Set a fixed width for square images */
   height: 180px; /* Set a fixed height for square images */

@@ -46,47 +46,45 @@ function Create() {
 
     // Rendering the form to create a new task
     return (
-        <div style={{marginTop: '20px', width: '50%', margin: 'auto', padding: '20px', backgroundColor: '#f2f2f2', borderRadius: '20px' }}>
-            <form onSubmit={handleSubmit}>
-                {/* Task name input */}
-                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
+        <div className="create-task-container">
+             {/* Task name input */}
+            <form onSubmit={handleSubmit} className="task-form">
+                <div className="form-group task-name-input">
                     <label>Add task Name: </label>
-                    <input type="text"
+                    <input
+                        type="text"
                         className="form-control"
                         value={name}
-                        onChange={(e) => { setName(e.target.value) }}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
-    
-                {/* Task description input */}
-                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
+                 {/* Task description input */}
+                <div className="form-group task-description-input">
                     <label>Add task Description: </label>
-                    <input type="text"
+                    <input
+                        type="text"
                         className="form-control"
                         value={description}
-                        onChange={(e) => { setDescription(e.target.value) }}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-    
                 {/* Task priority input */}
-                <div className="form-group" style={{ marginBottom: '10px', border: '1px solid black', padding: '10px' }}>
+                <div className="form-group task-priority-input">
                     <label>Add task Priority(1-10): </label>
-                    <input type="text"
+                    <input
+                        type="text"
                         className="form-control"
                         value={priority}
-                        onChange={(e) => { setPriority(e.target.value) }}
+                        onChange={(e) => setPriority(e.target.value)}
                     />
                 </div>
-    
                 {/* Submit button */}
-                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <div className="submit-button-container">
                     <input type="submit" value="Add task" className="btn btn-primary" />
                 </div>
             </form>
         </div>
     );
-    
-    
 }
 
 // Export the Create component for use in other parts of the app

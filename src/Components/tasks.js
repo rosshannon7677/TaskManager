@@ -13,5 +13,4 @@ function Tasks(props) {
     );
 }
 
-// Export the Tasks component for use in other parts of the app.
 export default Tasks;

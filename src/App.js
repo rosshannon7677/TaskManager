@@ -31,7 +31,7 @@ function App() {
               <Nav.Link className="nav-link-custom" href="/create">Create</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/list">List</Nav.Link>
               <Nav.Link className="nav-link-custom" href="/aboutUs">About Us</Nav.Link>
-              <Nav.Link className="nav-link-custom" href="/newsList">News List</Nav.Link>
+              <Nav.Link className="nav-link-custom" href="/newsList">News Articles</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

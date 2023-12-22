@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Tasks from "./tasks";
 
-// Define the List component
 function List() {
     // State 'data' to store the tasks
     const [data, setData] = useState([]);
@@ -25,7 +24,7 @@ function List() {
                         console.log(error);
                     }
                 )
-        }, [] // Empty dependency array means this effect runs only once after the initial render
+        }, [] 
     );
 
     // Function to reload tasks data
@@ -44,7 +43,10 @@ function List() {
                 }
             )
     }
-
+    
+    // Render the Tasks component with the fetched data
+    // Passing 'data' as 'myTasks' prop to the Tasks component
+    // Passing 'Reload' as 'ReloadData' prop to the Tasks component for refreshing the tasks list
     return (
         <div>
             <Tasks myTasks={data} ReloadData={Reload}></Tasks>
@@ -52,5 +54,4 @@ function List() {
     );
 }
 
-// Export the List component for use in other parts of the app
 export default List;
