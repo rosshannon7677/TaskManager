@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 app.use(cors());
 
 // Additional CORS configuration
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -40,7 +40,7 @@ const taskModel = mongoose.model('my_tasks', taskSchema);
 app.put('/api/task/:id', async (req, res) => {
     console.log('Update: ' + req.params.id);
 
-    let task = await taskModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    let task = await taskModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.send(task);
 });
 
@@ -56,9 +56,12 @@ app.delete('/api/task/:id', async (req, res) => {
 app.post('/api/task', (req, res) => {
     console.log(req.body);
 
-    // Check if the priority is within the allowed range of 1 to 10
+    // Convert the priority value from the request body to an integer
     const priority = parseInt(req.body.priority, 10);
+
+    // Check if the priority is not a number or outside the range of 1 to 10
     if (isNaN(priority) || priority < 1 || priority > 10) {
+        // Respond with a 400 Bad Request status code and an error message
         return res.status(400).send("Priority must be a number between 1 and 10.");
     }
 
@@ -68,11 +71,11 @@ app.post('/api/task', (req, res) => {
         description: req.body.description,
         priority: priority // Use the parsed priority
     })
-    .then(() => res.status(201).send("Task Created"))
-    .catch((error) => {
-        console.log(error);
-        res.status(500).send("Task NOT Created");
-    });
+        .then(() => res.status(201).send("Task Created"))
+        .catch((error) => {
+            console.log(error);
+            res.status(500).send("Task NOT Created");
+        });
 });
 
 
